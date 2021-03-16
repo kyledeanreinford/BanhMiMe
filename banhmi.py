@@ -1,8 +1,9 @@
-from flask import Flask 
+from flask import Flask, render_template
 import requests
 import geocoder
 import json 
 from os import environ
+
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -31,13 +32,14 @@ def home():
     biz_dict = []
 
     for biz in business_data['businesses']:
-        biz_dict.append({'name':biz['name'], 'address':biz['location'], 'rating':biz['rating']})
-    print (biz_dict)
-    return "<h1>You're craving one too, aren't you?</h1>"
+        if biz['is_closed'] == False:
+            biz_dict.append({'name':biz['name'], 'address':biz['location'], 'rating':biz['rating']})
+    print (biz_dict, my_lat, my_lon)
+    return render_template('home.html', business_data=business_data)
 
 @app.route('/why')
 def why():
-    return "<h1>Because they are delicious sandwiches and I wanted to show off</h1>"
-
+    return render_template('why.html')
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

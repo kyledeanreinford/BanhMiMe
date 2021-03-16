@@ -1,0 +1,15 @@
+.biz {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
