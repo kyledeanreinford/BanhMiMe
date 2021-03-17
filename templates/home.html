@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="center">You're craving one too, aren't you?</h1>
-    {% for business in business_data['businesses'] %}
-            <div class="biz"><h3><b>{{ business.name }}</b></h3>
-                <h4>{{ business.location.address1 }}, {{ business.location.city }} {{ business.location.zip_code}}</h4>
-                <h4></h4>{{ business.rating }} Stars
-                <h4><a href="https://google.com/maps/search/?api=1&query={{ business.name }}">Map</a></h4></div>
+<h1 class="center">FIND A BANH MI</h1>
+<small><a href={{ url_for('why') }}>why tho?</a></small>
+    {% for biz in list_of_biz %}
+        <div class="biz">
+            <h2>{{ biz.name }}</h2>
+            <h4>{{ biz.address.address1 }} <br>
+                {{ biz.address.city }}, {{ biz.address.state }} {{ biz.address.zip_code }}</h4>
+            <h4>Yelp rating: {{ biz.rating }} <br>
+                <a href="https://google.com/maps/search/?api=1&query={{ biz.name }}">Map</a></h4>
+        </div>
+
     {% endfor %}
 {% endblock content %}

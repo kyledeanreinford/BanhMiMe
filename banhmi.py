@@ -19,7 +19,7 @@ def home():
     HEADERS = {'Authorization': 'bearer %s' % API_KEY}
 
     PARAMETERS = {'term': 'banh mi',
-                  'limit': 5,
+                  'limit': 10,
                   'radius': 10000,
                   'offset': 0,
                   'sort_by': 'distance',
@@ -35,7 +35,9 @@ def home():
         if biz['is_closed'] == False:
             biz_dict.append({'name':biz['name'], 'address':biz['location'], 'rating':biz['rating']})
     print (biz_dict, my_lat, my_lon)
-    return render_template('home.html', business_data=business_data)
+    list_of_biz = biz_dict[0:5]
+    print(list_of_biz)
+    return render_template('home.html', list_of_biz=list_of_biz)
 
 @app.route('/why')
 def why():
